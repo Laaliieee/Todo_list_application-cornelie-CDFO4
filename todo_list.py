@@ -48,7 +48,7 @@ def main():
                 print("Task removed.")
             except ValueError:
                 print("Task not found.")
-        elif choice == "3":
+        elif choice == "4":
             print("\n===== Tasks =====")
             todo_list.display_tasks()
         elif choice == "4":
