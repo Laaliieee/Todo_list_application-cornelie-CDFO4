@@ -14,7 +14,10 @@ class TodoList:
         self.tasks = []
 
     def add_task(self, task):
-        self.tasks.append(task)
+        if isinstance(task, Task):
+            self.tasks.append(task)
+        else:
+            raise TypeError("Task must be an instance of the Task class.")
 
     def remove_task(self, task):
         self.tasks.remove(task)
@@ -30,12 +33,19 @@ class TodoList:
                 print(f"{i}. {task}")
 
     def change_task_status(self, task_number, new_status):
+        if not isinstance(new_status, str):
+            raise TypeError("New status must be a string.")
+
+        valid_statuses = ["Open", "In Progress", "Completed"]
+        if new_status not in valid_statuses:
+            raise ValueError("Invalid status. Status must be one of: Open, In Progress, Completed.")
+
         if 1 <= task_number <= len(self.tasks):
             task = self.tasks[task_number - 1]
             task.status = new_status
             print("Task status updated.")
         else:
-            print("Invalid task number.")
+            raise IndexError("Invalid task number. Task does not exist.")
 
     def change_task_importance(self, task_number, new_importance):
         if 1 <= task_number <= len(self.tasks):
